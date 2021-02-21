@@ -12,23 +12,36 @@ namespace Business.Concrete
         ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {
-            this._carDal = carDal;
+            _carDal = carDal;
         }
 
-        public void Add(Car car)
-        {
-            _carDal.Add(car);
-            Console.WriteLine("Veritabanına Eklendi : " + car.CarId);
-        }
+        //public void Add(Car car)
+        //{
+        //    if (car.DailyPrice > 0)
+        //    {
+        //        _carDal.Add(car);
+        //        Console.WriteLine("Araç Veritabanına Eklenmiştir.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Eklemek İstediğiniz Aracın Bilgileri Kayıt İçin Yeterli Değildir. Lütfen Düzeltip Tekrar Deneyiniz.");
+        //    }
+        //}
 
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public List<Car> GetById(int CarId)
+
+        public List<Car> GetCarByBrandId(int id)
         {
-            return _carDal.GetById(CarId);
+            return _carDal.GetAll(c => c.BrandId == id);
+        }
+
+        public List<Car> GetCarByColorId(int id)
+        {
+            return _carDal.GetAll(c => c.ColorId == id);
         }
     }
 }
